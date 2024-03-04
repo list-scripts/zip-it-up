@@ -1,0 +1,24 @@
+name: CI
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Zip up
+      uses: ./
+      id: zip
+      with:
+        directory: ./
+        output: zipped
+    - name: print outputs
+      env:
+        path: ${{ steps.zip.outputs.path }}
+        full_path: ${{ steps.zip.outputs.full_path }}
+      run: "echo Path: $path, Full Path: $full_path"
+    - name: upload zip
+      uses: actions/upload-artifact@v4
+      with:
+        name: zipped
+        path: ${{ steps.zip.outputs.path }}

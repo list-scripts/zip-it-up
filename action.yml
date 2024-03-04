@@ -1,0 +1,24 @@
+name: 'Zip It Up'
+description: 'Zips up the content of a specified directory'
+inputs:
+  directory:
+    description: 'the directory to zip up'
+    required: true
+    default: '.'
+    type: string
+  location:
+    description: 'the location to save the zip file'
+    required: true
+    default: 'zipped'
+    type: string
+outputs:
+  path:
+    description: 'the path to the zip file'
+  full_path:
+    description: 'the full path to the zip file'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.directory }}
+    - ${{ inputs.location }}
