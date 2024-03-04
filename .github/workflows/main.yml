@@ -11,7 +11,6 @@ jobs:
       id: zip
       with:
         directory: ./
-        output: zipped
     - name: print outputs
       env:
         path: ${{ steps.zip.outputs.path }}
